@@ -1,0 +1,114 @@
+Maven Notes:
+=================================
+
+Maven is the most used build management or project management tool in java world.
+Makes life of a Java Developer very easy.
+
+
+https://maven.apache.org/
+Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project's build, reporting and documentation from a central piece of information.
+
+
+What is Maven?
+https://maven.apache.org/what-is-maven.html
+
+Maven Features
+https://maven.apache.org/maven-features.html
+
+Maven FAQ
+https://maven.apache.org/general.html
+
+
+What Maven is?
+What is convention over configuration?
+
+Why to use Maven?
+What are advantages of Maven over other build tools?
+(Interview Question: Maven vs Gradle advantages/disadvantages)
+
+
+How?
+How to Install Maven.
+Create a simple maven project from commandline.
+Learn core concepts such as:
+	Project Object Model
+	Plugins and Goals
+	Maven project co-ordinates defined in configuration
+	Repositories maven creates and maintains
+	
+End-to-End Use case:
+	Create Standalone Java Project
+	Create a Maven Web Application which will use the Standalone Java Project
+	Bundle the Standalone Java Project and Maven Web Project into a Multi Module Java Maven Project
+
+	Using and creating maven projects using Eclipse and building them from commandline.
+	Customize the maven default settings.
+	How to run and skip the unit test within Eclipse and commandline.
+	Adding external dependencies like Java Spring Framework.
+	Configure Parent and Child projects in a Multi Module Project.
+	
+
+-----------------------------------------------------------------------------------------
+
+What is Maven?
+Developers call it a build management tool but it is much more than that it is a Project Management Tool.
+
+Research Item: Study more about Maven as Project Management Tool.
+
+Building a project means compiling the source code, run unit tests, package the code into jar (java archive files), bundle and package jar in to wars(web archive files), deploy packaged jars and wars onto servers.
+
+Build
+	- Compile
+	- Run Tests
+	- Package Jar/War
+	- Deploy jar or war to server.
+	- Many other such tasks.
+
+	All these can be automated using build tools like Maven.
+
+CONVENTION over CONFIGURATION
+Some tools like ANT use lots of XML configurations but Maven prefers convention over configuration.
+
+Example of Maven project
+MyProject folder structure example:::
+In a folder called myproject
+	src/main/java (contains java source code for the program or application being build)
+	src/main/resources (contains property files and xml configuration files to run the code/program/application)
+	src/test/java (contains test cases code e.g. Junit Test classes)
+	src/test/resources (contains property files and xml configuration files to run the tests)
+	
+	If you follow above standard folder structure
+	Then simply  execute command: myproject$ mvn install
+	When you run this command mvn will compile the source code in src/main/java.
+	It will run the tests in src/test/java.
+	Then it package the compiled java classes of the program or application into a jar file if its a standalone Java Application or into a war file if its a Java Web Application.
+	It can also deploy a war file onto a web application server.
+	
+	
+	Folder structures following the convention might be different for different types of projects say Java Standalone Application or Java Web Application. But we need not create these structures.
+	They can be created automatically by using Maven Archetypes.
+	
+	Maven archetypes are set of templates.
+	Examples are standalone, webapp, ear etc.
+	
+	All popular IDEs support this and projects created using archetypes can be imported into these IDE tools.
+	You can use the IDEs to create maven projects using IDEs, they have inbuilt support for this.
+	
+	
+Why use maven?
+Maven provides common interface and conventions.
+Thus unbderstanding build scripts becomes easy.
+Developer do not have to learn/unlearn different configuration file conventions developed and designed by variety of different organization. Avoids confusion, saves time if everyone is using standard convention.
+
+Thus Maven simplifies things.
+Simply get the source code from source code version control system like svn or git.
+And then execute the commad "mvn clean install"
+
+DEPENDENCY MANAGEMENT
+Maven is not only build management tool it can also manage dependencies.
+
+	
+	
+
+	
+	
