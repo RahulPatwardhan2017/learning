@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Questions CRUD</title>
+    <style>
+    input[type='submit'], button, [aria-label]{
+      cursor: pointer;
+    }
+    #spoiler{
+      display: none;
+    }
+
+#questions_table {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#questions_table td, #questions_table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#questions_table tr:nth-child(even){background-color: #f2f2f2;}
+
+#questions_table tr:hover {background-color: #ddd;}
+
+#questions_table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+
+
+    </style>
+</head>
+<body>
+
+
+<p id="counter"></p>
+
+<table border="1" id="questions_table">
+    <tr>
+        <th>Question Id</th>
+        <th>Question Type</th>
+        <th>Category</th>
+        <th>Difficulty Level</th>
+        <th>Question</th>
+        <th>Answers</th>
+        <th>CRUD Operations</th>
+    </tr>
+    <tbody id="questions">
+    </tbody>
+</table>
+
+<script>
+var app = new function() {
+
+  console.log("Calling constructor");
+  this.el = document.getElementById('questions');
+
+  this.questions = [
+                    {
+                        "qid": 1,
+                        "questionType": "MULTIPLE_CHOICE_SINGLE_ANSWER",
+                        "category": "GK",
+                        "difficultyLevel": "EASY",
+                        "question": "What is capital of India?",
+                        "answers": [{
+                                "id": "1",
+                                "answer": "Mumbai"
+                            },
+                            {
+                                "id": "2",
+                                "answer": "Kolkata"
+                            },
+                            {
+                                "id": "3",
+                                "answer": "New Delhi",
+                                "correctAns": "true"
+                            },
+                            {
+                                "id": "4",
+                                "answer": "Chennai"
+                            }
+                        ]
+                    },
+                    {
+                        "qid": 2,
+                        "questionType": "MULTIPLE_CHOICE_SINGLE_ANSWER",
+                        "category": "MATHEMATICS",
+                        "difficultyLevel": "EASY",
+                        "question": "What is 2+2?",
+                        "answers": [{
+                                "id": "1",
+                                "answer": "1"
+                            },
+                            {
+                                "id": "2",
+                                "answer": "2"
+                            },
+                            {
+                                "id": "3",
+                                "answer": "3"
+
+                            },
+                            {
+                                "id": "4",
+                                "answer": "4",
+                                "correctAns": "true"
+                            }
+                        ]
+                      }
+                   ];
+ console.log("Initialize Questions Object. Its length is = " + this.questions.length);
+ this.Count = function(data) {
+ console.log("count function called");
+    var el   = document.getElementById('counter');
+    var qid = 'questions';
+
+    if (data) {
+      if (data > 1) {
+        qid = 'questions';
+      }
+      el.innerHTML = data + ' ' + qid ;
+    } else {
+      el.innerHTML = 'No ' + qid;
+    }
+  };
+
+  this.FetchAll = function() {
+  console.log("FetchAll function called");
+    var data = '';
+
+    if (this.questions.length > 0) {
+      for (i = 0; i < this.questions.length; i++) {
+        data += '<tr>';
+        data += '<td>' + this.questions[i].qid + '</td>';
+        data += '<td>' + this.questions[i].questionType + '</td>';
+        data += '<td>' + this.questions[i].category + '</td>';
+        data += '<td>' + this.questions[i].difficultyLevel + '</td>';
+        data += '<td>' + this.questions[i].question + '</td>';
+        //console.log("this.questions[i].answers ===> " + this.questions[i].answers);
+        var ans = this.FetchAnswers(this.questions[i].answers);
+        console.log("ans = " + ans);
+        data += '<td>' + [ ans ] + '</td>';
+        data += '<td><button onclick="app.Delete(' + i + ')">Delete</button></td>';
+        data += '</tr>';
+      }
+    }
+
+    this.Count(this.questions.length);
+    return this.el.innerHTML = data;
+  };
+
+  this.FetchAnswers = function(answerObj){
+        var answerString=" ";
+        for (j in answerObj) {
+         answerString += " "+ answerObj[j].id + ") " + answerObj[j].answer + " { " + (answerObj[j].correctAns? 'correct' : '') +"} ";
+        }
+        console.log(answerString);
+        return answerString;
+   }
+
+   this.Delete = function (item) {
+    // Delete the current row
+    this.questions.splice(item, 1);
+    // Display the new list
+    this.FetchAll();
+  };
+
+}
+
+app.FetchAll();
+
+
+</script>
+</body>
+</html>
